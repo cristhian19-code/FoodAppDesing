@@ -3,7 +3,7 @@
         <div class="input-search">
             <input class="search" type="text" placeholder="Search">
         </div>
-        <div class="types-foods">
+        <div class="types-foods d-flex flex-wrap">
             <div class="type-food">
                 <img src="@/assets/chicken-leg.svg" alt="" height="80" width="80">
             </div>
@@ -23,13 +23,21 @@
                 <img src="@/assets/sushi.svg" alt="" height="80" width="80">
             </div>
         </div>
-        <p class="title-best-offers text-white">Best Offers</p>
-        <div class="best-offers">
-            <OfferFoodVue v-for="(item) in offers" :key="item.url" :url="item.url" :name="item.name" :price="item.price"/>
+
+        <!-- Best Offers -->
+        <div class="mb-5">
+            <p class="display-6 fw-bold text-white mb-5">Best Offers</p>
+            <div class="best-offers d-flex flex-wrap">
+                <OfferFoodVue v-for="(item) in offers" :key="item.name" :url="item.url" :name="item.name" :price="item.price"/>
+            </div>
         </div>
-        <p class="title-best-offers text-white">Favorite Restaurants</p>
-        <div class="favorite-restaurants">
-            <RestaurantVue v-for="(item) in restaurants" :key="item.url" :url="item.url" :name="item.name" :location="item.location"/>
+
+        <!-- Favorite Restaurants -->
+        <div class="mb-5">
+            <p class="display-6 fw-bold text-white mb-5">Favorite Restaurants</p>
+            <div class="favorite-restaurants flex-wrap">
+                <RestaurantVue v-for="(item) in restaurants" :key="item.name" :url="item.url" :name="item.name" :location="item.location"/>
+            </div>
         </div>
   </div>
 </template>
@@ -47,11 +55,13 @@ export default {
             offers: [
                 {url: 'https://www.flaticon.es/premium-icon/icons/svg/3183/3183463.svg',name: 'Ensada con carne y huevo',price: 15},
                 {url: 'https://www.flaticon.com/premium-icon/icons/svg/1065/1065715.svg',name: 'Ensalada con chuleta',price: 21.8},
+                {url: 'https://www.flaticon.com/premium-icon/icons/svg/1065/1065715.svg',name: 'Ensalada con chuleta',price: 21.8},
                 {url: 'https://www.flaticon.com/premium-icon/icons/svg/2276/2276931.svg',name: 'Marisco con huevo',price: 14.9},
                 {url: 'https://www.flaticon.com/premium-icon/icons/svg/2515/2515249.svg',name: 'Ramen de cerdo',price: 17.5}
             ],
             restaurants: [
                 {url: 'https://images.pexels.com/photos/4450334/pexels-photo-4450334.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',name: 'My Italy',location: '101 W 112th St #APT 1E'},
+                {url: 'https://images.pexels.com/photos/4577179/pexels-photo-4577179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',name: 'Mediterranean',location: '966 Lexington Ave'},
                 {url: 'https://images.pexels.com/photos/4577179/pexels-photo-4577179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',name: 'Mediterranean',location: '966 Lexington Ave'},
                 {url: 'https://images.pexels.com/photos/2290070/pexels-photo-2290070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',name: 'Monica',location: '7000 Kennedy Bivd E'}
             ]
@@ -75,10 +85,10 @@ export default {
 }
 
 .container-body{
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 10px 30px;
+    padding: 10px 20px;
     overflow-y: scroll;
 }
 
@@ -101,7 +111,6 @@ export default {
 
 .input-search{
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 10px 0;
 }
@@ -126,14 +135,13 @@ export default {
     padding: 20px 0;
     justify-content: center;
     align-items: center;
-    grid-gap: 30px;
+    grid-gap: 20px;
 }
 
 .type-food{
     height: 120px;
     width: 120px;
     background-color: #ECF0F1;
-    box-shadow: 8px 8px 15px 0px rgba(199,199,199,0.7);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -164,12 +172,5 @@ export default {
     border-radius: 50%;
     outline: none;
     cursor: pointer;
-}
-
-
-
-.title-best-offers{
-    font-size: 20px;
-    font-weight: bold;
 }
 </style>

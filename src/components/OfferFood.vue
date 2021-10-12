@@ -12,7 +12,7 @@
                     name,
                     price,
                     cant: 1
-                })" class="btn-plus" type="button"><i class="el-icon-plus"></i></button>
+                })" class="btn-plus d-flex align-items-center justify-content-center" type="button"><i class="el-icon-plus"></i></button>
             </div>
         </dir>
     </div>
@@ -78,5 +78,11 @@ export default {
 .price{
     font-size: 17px;
     font-weight: bold;
+}
+
+@media(max-width: 1100px){
+    .offer-food{
+        margin-top: 50px
+    }
 }
 </style>

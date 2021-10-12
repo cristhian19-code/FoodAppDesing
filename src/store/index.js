@@ -20,13 +20,28 @@ export default createStore({
       }
 
       console.log(state.carrito);
+    },
+    setFoods(state){
+      state.carrito = []
     }
   },
   actions: {
     AddTrolley({commit},food){
       commit('Carrito',food)
+    },
+    ClearCart({commit}){
+      commit('setFoods')
     }
   },
-  modules: {
+  getters: {
+    getTotal(state){
+      var total = 0;
+
+      state.carrito.forEach(prod=> {
+        total += prod.price*prod.cant
+      })
+
+      return total
+    }
   }
 })

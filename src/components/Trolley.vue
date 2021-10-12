@@ -1,69 +1,85 @@
 <template>
-  <div class="trolley">
-      <div class="user">
-        <img class="avatar" src="https://images.pexels.com/photos/1671325/pexels-photo-1671325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" height="50" width="50" />
-        <h3 class="name-user">Christian Ricardo</h3>
-      </div>
-      <h3 class="mx-2">My Order</h3>
-      <div class="order">
-        <ul>
-          <li v-for="(item,index) in carrito" :key="index">
-            <img :src="item.url" alt="" height="30" width="30">
-            <p class="nombre-trolley">{{item.name}}</p>
-            <b class="mx-2">{{item.cant}}</b>
-            <p class="mx-2">{{(item.price * item.cant).toFixed(1)}}</p>
-          </li>
-        </ul>
-      </div>
+  <div id="sidebar" class="bg-ligth trolley">
+    <div>
+      <button class="menu btn btn-success py-2 px-3">
+        <span>&#9776;</span>
+      </button>
+    </div>
+    <div class="d-flex align-items-center justify-content-around">
+      <h3 class="my-4 text-center">My Order</h3>
+      <button class="btn btn-outline-primary" @click="ClearCart()">Clean</button>
+    </div>
+    <div class="order">
+      <ul>
+        <li class="bg-primary d-flex justify-content-around align-items-center mt-2 rounded-2 px-2 py-3 text-white" v-for="(item, index) in carrito" :key="index">
+          <img :src="item.url" alt="" height="30" width="30" />
+          <span>{{ item.name }}</span>
+          <b class="mx-2">{{ item.cant }}</b>
+          <span>S/.{{ item.price * item.cant }}</span>
+        </li>
+      </ul>
+    </div>
+    <p class="text-center">Total: S/.{{ getTotal.toFixed(2) }}</p>
+    <div class="d-flex justify-content-center px-3">
+      <button class="col-12 btn btn-outline-dark">Comprar</button>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState, mapGetters,mapActions } from "vuex";
 
 export default {
-  computed:{
-    ...mapState(['carrito']),
+  data() {
+      return {
+          windowWidth: window.innerWidth
+      }
+  },
+  computed: {
+    ...mapState(["carrito"]),
+    ...mapGetters(["getTotal"]),
+  },
+  methods:{
+    ...mapActions(['ClearCart'])
+  },
+  mounted() {
+      const button = document.querySelector('.menu')
+
+      button.addEventListener('click',()=>{
+        document.getElementById('sidebar').classList.toggle('active')
+      })
+
+      window.onresize = () => {
+          this.windowWidth = window.innerWidth
+      }
   }
-}
+};
 </script>
 
-<style>
-.trolley{
-    width: 20%;
+<style scoped>
+.menu{
+  position: absolute;
+  right: 320px;
+  top: 10px;
 }
 
-.user{
-    display: flex;
-    padding: 20px 0;
-    grid-gap: 10px;
-    justify-content: center;
-    align-items: center;
+#sidebar{
+  position: fixed;
+  height: 100%;
+  background-color: white;
+  color: black;
+  width: 300px;
+  right: -300px;
+  transition: all .5s linear;
 }
 
-.avatar{
-    border-radius: 50%;
+#sidebar.active{
+  right: 0
 }
 
-ul{
+ul {
   list-style: none;
   padding: 10px;
-  
-}
-
-li{
-  display: flex;
-  text-align: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.nombre-trolley{
-  width: 130px;
-}
-
-.mx-2{
-  margin: 0 10px;
 }
 
 </style>
